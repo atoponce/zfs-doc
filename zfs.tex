@@ -1,0 +1,61 @@
+\documentclass{book}
+
+\usepackage{xcolor}
+\usepackage{listings}
+
+\lstset{ %
+ basicstyle=\ttfamily,
+ breaklines=true,
+ escapechar=|,
+}
+
+\begin{document}
+
+\begin{titlepage}
+\title{ZFS Administration}
+\author{Aaron Toponce}
+\maketitle
+\end{titlepage}
+
+\chapter{Installing ZFS on Linux}
+First, we'll start with installing ZFS as a kernel module, not FUSE, on
+Debian GNU/Linux. The documents already exist for getting this going, I’m
+just hoping to spread this to a larger audience, in case you are unaware
+that it exists.
+
+First, the Lawrence Livermore National Laboratory has been working on
+porting the native Solaris ZFS source to the Linux kernel as a kernel
+module. So long as the project remains under contract by the Department of
+Defense in the United States, I’m confident there will be continuous
+updates. You can track the progress of that porting at
+http://zfsonlinux.org.
+
+\begin{lstlisting}
+|\$| su -
+# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_1%7Ewheezy_all.deb
+# dpkg -i zfsonlinux_1~wheezy_all.deb
+# apt-get update
+# apt-get install debian-zfs
+\end{lstlisting}
+
+And that’s it!
+
+If you’re running Ubuntu, which I know most of you are, you can install the
+packages from the Launchpad PPA https://launchpad.net/\~zfs-native.
+
+Now, make your zpool, and start playing:
+
+\begin{lstlisting}
+|\$| sudo zpool create test raidz sdd sde sdf sdg sdh sdi
+\end{lstlisting}
+
+It is stable enough to run ZFS on production data. It is copy-on-write,
+supports compression, deduplication, file atomicity, off-disk caching,
+encryption, and much more. At this point, unfortunately, I’m convinced that
+ZFS as a Linux kernel module will become “stable” long before Btrfs will be
+stable in the mainline kernel. Either way, it doesn’t matter to me. Both
+are Free Software, and both provide the long needed features we’ve needed
+with today’s storage needs. Competition is healthy, and I love having
+choice. Right now, that choice might just be ZFS.
+
+\end{document}
