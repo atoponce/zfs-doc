@@ -1,7 +1,8 @@
-\documentclass{book}
+\documentclass[landscape]{book}
 % Need to change margins for tablet viewing
 %\special{papersize=155.575mm,234.95mm}
 
+%\usepackage{fullpage}
 \usepackage{listings}
 
 \lstset{ %
@@ -126,7 +127,7 @@ zpool named "tank" with the following command:
 
 \begin{lstlisting}
 # zpool create tank sde sdf sdg sdh
-\end{listlisting}
+\end{lstlisting}
 
 In this case, I'm using four disk VDEVs. Notice that I'm not using full
 device paths, although I could. Because VDEVs are always dynamically
